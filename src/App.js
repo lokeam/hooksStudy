@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import rhook from './rhook.png';
 import './App.css';
 
-function App() {
+function callOnce() {
+  // I'm an expensive operation, call me only once on initial load.
+  return 9999;
+}
+
+const App = () => {
+/** useState Hook
+ * @param   {String/Number} count - value of state
+ * @param   {Function}      setCount - function that allows you to update param 1
+ * @returns {Array}
+ */
+  // This will only be called first time app renders
+  const [count, setCount] = useState( () => callOnce());
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={rhook} className="hook-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Nothing to see here, just practising hooks.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <section className="area__useState">
+        <div className="hero__copy">
+          <h2>use state</h2>
+        </div>
+      </section>
     </div>
   );
 }

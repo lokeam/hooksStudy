@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useForm} from './useForm';
 import rhook from './rhook.png';
 import './App.css';
 
@@ -18,7 +19,13 @@ const App = () => {
 
   // Second example: Incrementing a counter
   const [ count, setCount ] = useState(10);
+  
+  // Third example: Incrementing a counter avoiding race conditions
   const [ {countExampleA, countExampleB}, setCountExample ] = useState({countExampleA: 10, countExampleB: 15});
+
+  // Fourth example: Email and password form fields utilizing the custom useForm hook (ln 2)
+  const [ values, handleChange ] = useForm({ email: '', password: '' });
+
   return (
     <div className="App">
       <header className="App-header">
@@ -54,6 +61,16 @@ const App = () => {
               }>+</button>
             <div className="countExampleA">Example 3 count A: {countExampleA}</div>
             <div className="countExampleB">Example 3 count B: {countExampleB}</div>
+          </div>
+          <div className="example">
+            <h3>Example 4: Form Field ID and Password</h3>
+            <input name="email"
+                   value={ values.email }
+                   onChange={ handleChange }/>
+            <input name="password"
+                   value={ values.password }
+                   type="password"
+                   onChange={ handleChange }/>
           </div>
         </div>
       </section>

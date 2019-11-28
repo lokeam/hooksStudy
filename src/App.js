@@ -44,7 +44,7 @@ const App = () => {
           <div className="example">
             <h3>Example 2: Incrementing a Counter</h3>
             <button onClick={ () => setCount(count + 1)}>+</button>
-            <div>{count}</div>
+            <div>Example 2 count: {count}</div>
           </div>
           <div className="example">
             <h3>Example 3: Incrementing a Counter</h3>
@@ -59,8 +59,8 @@ const App = () => {
                   countExampleA: currentState.countExampleA + 1
                 }))
               }>+</button>
-            <div className="countExampleA">Example 3 count A: {countExampleA}</div>
-            <div className="countExampleB">Example 3 count B: {countExampleB}</div>
+            <div className="example__copy countExampleA">Example 3 count A: {countExampleA}</div>
+            <div className="example__copy countExampleB">Example 3 count B: {countExampleB}</div>
           </div>
           <div className="example">
             <h3>Example 4: Form Field ID and Password</h3>

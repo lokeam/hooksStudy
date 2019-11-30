@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import {useForm} from './useForm';
 import rhook from './rhook.png';
 import './App.css';
@@ -25,6 +25,17 @@ const App = () => {
 
   // Fourth example: Email and password form fields utilizing the custom useForm hook (ln 2)
   const [ values, handleChange ] = useForm({ email: '', password: '' });
+
+  // Fifth example: Email and password form fields, utilizing useEffect
+  const [ valuesUE, handleChangeUE ] = useForm( {email: '', password: ''} );
+/** useEffect hook
+ *
+ * @returns
+ */
+useEffect( () => {
+  console.log('useEffect render');
+}, [valuesUE.password] );
+
 
   return (
     <div className="App">
@@ -71,6 +82,24 @@ const App = () => {
                    value={ values.password }
                    type="password"
                    onChange={ handleChange }/>
+          </div>
+        </div>
+      </section>
+      <section className="area__useEffect">
+        <div className="hero__copy">
+          <h2>useEffect</h2>
+          <div className="example">
+            <h3>Example 1: Only trigger a render when password data is changed</h3>
+            <p>Copy here</p>
+            <input name="email"
+                   value={ valuesUE.email }
+                   onChange={ handleChangeUE }
+                   placeholder="email" />
+            <input name="password"
+                   value={ valuesUE.password }
+                   type="password"
+                   onChange={ handleChangeUE }
+                   placeholder="password" />
           </div>
         </div>
       </section>

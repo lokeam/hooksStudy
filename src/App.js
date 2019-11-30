@@ -3,6 +3,7 @@ import {useForm} from './useForm';
 import rhook from './rhook.png';
 import './App.css';
 import { ShowHideHello } from './ShowHideHello';
+import { useFetch } from './useFetch';
 
 // function callOnce() {
 //   // I'm an expensive operation, call me only once on initial load.
@@ -37,18 +38,46 @@ const App = () => {
  *
  * @returns
  */
-  // Fith Example 
+  // Fifth Example 
  // useEffect( () => {
   //   console.log('useEffect render');
   // }, [valuesUE.password] );
 
-  useEffect( () => {
-    console.log('useEffect, render');
+  // Sixth Example
+  // useEffect( () => {
+  //   console.log('useEffect, render');
 
-    return() => {
-      console.log('useEffect, unmount');
-    }
-  })
+  //   return() => {
+  //     console.log('useEffect, unmount');
+  //   }
+  // })
+
+  // Seventh Example: useEffect and event listeners
+  // useEffect( () => {
+  //   const onMouseMove = ( event ) => {
+  //     console.log(event);
+  //   }
+  //   window.addEventListener('mousemove', onMouseMove);
+
+  //   // clean up after complete
+  //   return () => {
+  //     window.removeEventListener('mousemove', onMouseMove);
+  //   }
+  // })
+
+  // Eighth Example: Mulitple useEffects, firing sequentially
+  // useEffect( () => {
+  //   console.log('mount 1');
+  // });
+
+  // useEffect( () => {
+  //   console.log('mount 2');
+  // });
+
+  // Ninth Example: making API calls
+  const [ countExample9, setCountExample9 ] = useState(0);
+  const { data, loading } = useFetch(`http://numbersapi.com/${countExample9}/trivia`);
+  console.log(data);
 
   return (
     <div className="App">
@@ -118,6 +147,12 @@ const App = () => {
             <h3>Example 2: Using a Clean-up Function with useEffect</h3>
               <button onClick={ () => setShowHello(!showHello) }>Toggle Show Hello</button>
               { showHello && <ShowHideHello /> }
+          </div>
+          <div className="example">
+            <h3>Example 3: API calls with useEffect</h3>
+            <div>{loading ? "loading... " : data }</div>
+            <div>API count: { countExample9 }</div>
+            <button onClick={ () => {setCountExample9( countExample9 => countExample9 + 1)} }>Make API call</button>
           </div>
         </div>
       </section>

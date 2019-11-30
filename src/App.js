@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react';
 import {useForm} from './useForm';
 import rhook from './rhook.png';
 import './App.css';
+import { ShowHideHello } from './ShowHideHello';
 
 // function callOnce() {
 //   // I'm an expensive operation, call me only once on initial load.
@@ -28,14 +29,26 @@ const App = () => {
 
   // Fifth example: Email and password form fields, utilizing useEffect
   const [ valuesUE, handleChangeUE ] = useForm( {email: '', password: ''} );
-/** useEffect hook
+
+  // Sixth example: Using a cleanup function with useEffect
+  const [ showHello, setShowHello ] = useState(true);
+
+  /** useEffect hook
  *
  * @returns
  */
-useEffect( () => {
-  console.log('useEffect render');
-}, [valuesUE.password] );
+  // Fith Example 
+ // useEffect( () => {
+  //   console.log('useEffect render');
+  // }, [valuesUE.password] );
 
+  useEffect( () => {
+    console.log('useEffect, render');
+
+    return() => {
+      console.log('useEffect, unmount');
+    }
+  })
 
   return (
     <div className="App">
@@ -100,6 +113,11 @@ useEffect( () => {
                    type="password"
                    onChange={ handleChangeUE }
                    placeholder="password" />
+          </div>
+          <div className="example">
+            <h3>Example 2: Using a Clean-up Function with useEffect</h3>
+              <button onClick={ () => setShowHello(!showHello) }>Toggle Show Hello</button>
+              { showHello && <ShowHideHello /> }
           </div>
         </div>
       </section>
